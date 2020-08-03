@@ -198,7 +198,7 @@ class HashTable:
             next_item = cur_item.next
             
             while cur_item:
-                if cur_item.key == key:    # key is present #
+                if cur_item.key == key:     
                     if is_delete_operation:
                         prev_item.next = next_item
                     else:
