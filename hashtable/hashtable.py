@@ -7,6 +7,8 @@ class HashTableEntry:
         self.value = value
         self.next = None
 
+    def __repr__(self):
+        return (f'(key = {self.key}, value = {self.value})')
 
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
@@ -23,6 +25,7 @@ class HashTable:
     def __init__(self, capacity = MIN_CAPACITY):
         self.buckets = [None] * capacity
         self.capacity = capacity
+        self.count = 0
 
 #SLOT: NUMBER OF SLOTS IN THE MAIN LIST.
     def get_num_slots(self):
@@ -44,7 +47,7 @@ class HashTable:
 
         Implement this.
         """
-        return get_load_factor
+        return(self.count/self.capacity)
         
 #Fowler noll vo hash function: basis of the FNV hash algorithm to Speed of computation, sticky state, diffusion.
 #http://www.isthe.com/chongo/tech/comp/fnv/index.html#public_domain
@@ -72,6 +75,10 @@ class HashTable:
         Implement this, and/or FNV-1.
         """
         # Your code here
+        hash = 5381
+        for x in key:
+            hash = (hash * 33) + ord(x)
+        return hash
 
 #INDEX
     def hash_index(self, key, capacity):
@@ -212,6 +219,10 @@ class HashTable:
                 prev_item = cur_item
                 cur_item = next_item
                 next_item = cur_item.next
+    
+    def check_ht(self):
+        print(f'\nFactor: {ht.get_load_factor():.3f}')
+        print(f'size: {ht.capacity}, count: {ht.count}')
 
 if __name__ == "__main__":
     ht = HashTable(8)
