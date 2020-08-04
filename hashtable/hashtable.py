@@ -220,7 +220,7 @@ class HashTable:
                 cur_item = next_item
                 next_item = cur_item.next
     
-    def check_ht(self):
+    def check(self):
         print(f'\nFactor: {ht.get_load_factor():.3f}')
         print(f'size: {ht.capacity}, count: {ht.count}')
 
