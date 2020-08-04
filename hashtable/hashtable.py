@@ -39,7 +39,8 @@ class HashTable:
 
     def get_load_factor(self):
         """
-        Returns (total / self.capacity) aka all occupied space
+        Returns the load factor for this hash table.
+        imprement this 
         """
         return (self.count / self.capacity)
 
@@ -54,7 +55,6 @@ class HashTable:
     def fnv1(self, key):
         """
         FNV-1 Hash, 64-bit
-        https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
         Implement this, and/or DJB2.
         """
  
