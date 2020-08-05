@@ -48,3 +48,53 @@ if __name__=="__main__":
  
 print("The number of words: ", num_words)
 print("The number of lines: ", num_lines)
+
+
+def main():
+  for line in robin:
+    robin_hist = int(line)
+    robin.incCount(count_words(robin_hist))
+    print(robin)
+
+
+import pandas
+from collections import Counter
+
+letter_counts = Counter(robin)
+df = pandas.DataFrame.from_dict(letter_counts, orient='index')
+df.plot(kind='bar')
+
+
+import matplotlib.pyplot as plt 
+import numpy as np
+labels, counts = np.unique(robin,return_counts=True)
+ticks = range(len(counts))
+plt.bar(ticks,counts, align='center')
+plt.xticks(ticks, labels)
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+letters_hist = Counter(robin.lower().replace('\n', ''))
+counts = letters_hist.values()
+letters = letters_hist.keys()
+
+# graph data
+bar_x_locations = np.arange(len(counts))
+plt.bar(bar_x_locations, counts, align = 'center')
+plt.xticks(bar_x_locations, letters)
+plt.grid()
+plt.show()
+
+# Creating histogram 
+fig, ax = plt.subplots(figsize =(10, 7)) 
+ax.hist(robin, bins = [0, 25, 50, 75, 100]) 
+  
+# Show plot 
+plt.show()
+
+
+plt.hist(robin,5, histtype='step', align='mid', color='g', label='Test Score Data')
+plt.legend(loc=2)
+plt.title('Histogram of score')
+plt.show()
