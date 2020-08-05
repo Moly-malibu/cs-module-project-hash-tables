@@ -2,6 +2,7 @@
 #https://careerkarma.com/blog/python-sort-a-dictionary-by-value/#:~:text=To%20sort%20a%20dictionary%20by%20value%20in%20Python%20you%20can,Dictionaries%20are%20unordered%20data%20structures.
 #https://pythonexamples.org/python-count-number-of-words-in-text-file/
 #https://stackoverflow.com/questions/21107505/word-count-from-a-txt-file-program
+#https://www.pythonforengineers.com/create-a-word-counter-in-python/
 
 with open('applications/histo/robin.txt') as file:
     robin = file.read() 
@@ -26,5 +27,24 @@ for  (word,occurance)  in wordCounter.items(): #occurrence
   print('{:15}{:3}'.format(word,occurance))
 
 
+def count_words(robin):
+    words = robin.split(' ')
+    num_words = len(words)
+    return num_words
+print(count_words)
 
 
+def count_lines(robin):
+   lines = robin.split("\n")
+   for l in lines:
+      if not l:
+         lines.remove(l)
+ 
+   return len(lines)
+
+if __name__=="__main__":
+    num_words = count_words(robin)
+    num_lines = count_lines(robin)
+ 
+print("The number of words: ", num_words)
+print("The number of lines: ", num_lines)
