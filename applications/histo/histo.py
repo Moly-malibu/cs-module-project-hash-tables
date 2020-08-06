@@ -4,12 +4,46 @@
 #https://stackoverflow.com/questions/21107505/word-count-from-a-txt-file-program
 #https://www.pythonforengineers.com/create-a-word-counter-in-python/
 
-with open('applications/histo/robin.txt') as file:
-    robin = file.read() 
-print(robin)
-words = robin.split()
-print('number of words in text file:', len(words))
+# Implement me.
+import re
+import random
 
+#Get data and cound words:
+with open('applications/histo/robin.txt') as file:
+    word = file.read() 
+    split_words = word.split()
+print(word)
+print('number of words in text file:', len(split_words))
+
+#Data into dictionary
+dataset = {}
+
+for i in range(len(split_words) -1): #pass dataset into dictionary
+    word = split_words[i]
+    next_word = split_words[i + 1]
+    if word not in dataset:
+        dataset[word] = [next_word]
+    else:
+        dataset[word].append(next_word)
+print(dataset)
+
+start_words = []
+
+for key in dataset.keys(): # words list
+    if key[0].isupper() or len(key) >1 and key[1].isupper():
+        start_words.append(key)
+word = random.choice(start_words)
+
+stopped = False
+stop_signs = "?.!"
+while not stopped:
+    print(word)
+    if word[-1] in stop_signs or len(word) > 1 and word[-2] in stop_signs:
+        stopped = True
+    following_words = dataset[word]
+    word = random.choice(following_words)
+
+#histogram
 wordCounter = {}
 
 with open('applications/histo/robin.txt','r') as fh:
@@ -26,75 +60,25 @@ print('-' * 18)
 for  (word,occurance)  in wordCounter.items(): #occurrence
   print('{:15}{:3}'.format(word,occurance))
 
-
-def count_words(robin):
-    words = robin.split(' ')
-    num_words = len(words)
-    return num_words
-print(count_words)
-
-
-def count_lines(robin):
-   lines = robin.split("\n")
-   for l in lines:
-      if not l:
-         lines.remove(l)
- 
-   return len(lines)
-
-if __name__=="__main__":
-    num_words = count_words(robin)
-    num_lines = count_lines(robin)
- 
-print("The number of words: ", num_words)
-print("The number of lines: ", num_lines)
-
-
 def main():
-  for line in robin:
+  for line in word:
     robin_hist = int(line)
     robin.incCount(count_words(robin_hist))
     print(robin)
-
-
-import pandas
-from collections import Counter
-
-letter_counts = Counter(robin)
-df = pandas.DataFrame.from_dict(letter_counts, orient='index')
-df.plot(kind='bar')
-
-
-import matplotlib.pyplot as plt 
-import numpy as np
-labels, counts = np.unique(robin,return_counts=True)
-ticks = range(len(counts))
-plt.bar(ticks,counts, align='center')
-plt.xticks(ticks, labels)
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-letters_hist = Counter(robin.lower().replace('\n', ''))
-counts = letters_hist.values()
-letters = letters_hist.keys()
-
-# graph data
-bar_x_locations = np.arange(len(counts))
-plt.bar(bar_x_locations, counts, align = 'center')
-plt.xticks(bar_x_locations, letters)
-plt.grid()
-plt.show()
-
-# Creating histogram 
-fig, ax = plt.subplots(figsize =(10, 7)) 
-ax.hist(robin, bins = [0, 25, 50, 75, 100]) 
-  
-# Show plot 
-plt.show()
-
-
-plt.hist(robin,5, histtype='step', align='mid', color='g', label='Test Score Data')
-plt.legend(loc=2)
-plt.title('Histogram of score')
-plt.show()
+    
+#Histogram
+count = {}
+f = open('applications/histo/robin.txt')
+text = f.read().lower()
+f.close()
+text = re.sub('[^a-z\ \']+', " ", text)
+words = list(text.split())
+word_count = {}
+word_set = set(words)
+for word in word_set:
+    word_count[word] = "#" * words.count(word)
+items = list(word_count.items())
+items.sort()
+items.sort(key=lambda x: x[1], reverse= True)
+for item in items:
+    print(f'{item[0]:{17}}{item[1]}')

@@ -1,7 +1,22 @@
+
+#WORDS INTO THE DICTIONARY:
+
+
 def word_count(s):
     # Your code here
+    cache = {}
+    stop_character = [" : ; , . - + = / \ | [ ] { } ( ) * ^ &"":;,.-+=/\\|[]{}()*^&"]
 
+    for i in stop_character:
+        s = s.replace(i, '')
 
+    words = s.lower().split()
+    for word in words:
+        if word in cache:
+            cache[word] += 1
+        else:
+            cache[word] = 1
+    return cache
 
 if __name__ == "__main__":
     print(word_count(""))
