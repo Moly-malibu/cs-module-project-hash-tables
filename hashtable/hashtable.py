@@ -172,8 +172,6 @@ class HashTable:
         """
         Changes the capacity of the hash table and
         rehashes all key/value pairs.
-        ht is overloaded when load factor > 0.7
-        ht is underloaded when load factor < 0.2
         """
         old_data = self.buckets
 
