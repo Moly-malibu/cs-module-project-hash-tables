@@ -12,20 +12,16 @@ class HashTableEntry:
 
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
-
-
 class HashTable:
     """
     A hash table that with `capacity` buckets
     that accepts string keys
     Implement this.
     """
-
     def __init__(self, capacity=MIN_CAPACITY):
         self.capacity = capacity
         self.buckets = [None] * capacity
         self.count = 0
-
 #GET
     def get_num_slots(self):
         """
@@ -36,14 +32,12 @@ class HashTable:
         Implement this.
         """
         return self.capacity
-
     def get_load_factor(self):
         """
         Returns the load factor for this hash table.
         imprement this 
         """
         return (self.count / self.capacity)
-
 #UPDATE
     def update_load_factor(self):
         """
@@ -51,13 +45,11 @@ class HashTable:
         Added for stretch implementation
         """
         self.load_factor = (self.count / self.capacity)
-
     def fnv1(self, key):
         """
         FNV-1 Hash, 64-bit
         Implement this, and/or DJB2.
         """
- 
         FNV_offset_basis = 14695981039346656037 
         FNV_prime = 1099511628211
         
@@ -67,7 +59,6 @@ class HashTable:
             hash = hash * FNV_prime
             hash = hash ^ byte
         return hash
-
     def djb2(self, key):
         """
         DJB2 hash, 32-bit
@@ -77,7 +68,6 @@ class HashTable:
         for x in key:
             hash = (hash * 33) + ord(x)
         return hash
-
 #INDEX
     def hash_index(self, key):
         """
@@ -86,7 +76,6 @@ class HashTable:
         """
         #return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
-
 #PUT
     def put(self, key, value):
         """
@@ -109,11 +98,9 @@ class HashTable:
                 node.next = HashTableEntry(key, value) #new key, insert value
                 self.count += 1
 #UPDATE LOAD
-
         self.update_load_factor()
         if self.load_factor > 0.7:
             self.resize()
-
 #DELETE
     def delete(self, key):
         """
@@ -122,7 +109,6 @@ class HashTable:
         Implement this.
         """
         index = self.hash_index(key)
-
         if self.buckets[index] is None: #if not matching hash, nothing to delete
             print("Error: Key not found.")
             return None
@@ -132,7 +118,6 @@ class HashTable:
             while node.key != key and node.next is not None:
                 prev = node
                 node = node.next
-
             if node.key == key: #key found delete
                 if prev is None:
                     self.buckets[index] = node.next
@@ -143,11 +128,9 @@ class HashTable:
                 if self.load_factor < 0.2 and self.capacity >= 16:
                     self.resize(self.capacity // 2)
                 return node.value
-
             else:
                 print("Error: Key not found.")
                 return None
-
 #GET
     def get(self, key):
         """
@@ -166,7 +149,6 @@ class HashTable:
                 return node.value
             else:
                 return None
-
 #RESIZE
     def resize(self, new_capacity= None):
         """
@@ -186,22 +168,17 @@ class HashTable:
                 self.put(node.key, node.value)
                 self.count -= 1
                 node = node.next
-
         self.update_load_factor()
-   
     def check(self):
         """
         for testing
         """
         print(f"\nFactor: {ht.get_load_factor():.3f}")
         print(f"Size: {ht.capacity}, Count: {ht.count}")
-
 if __name__ == "__main__":
     ht = HashTable(8)
-
     # Factor check
     ht.check()
-
     ht.put("line_1", "'Twas brillig, and the slithy toves")
     ht.put("line_2", "Did gyre and gimble in the wabe:")
     ht.put("line_3", "All mimsy were the borogoves,")
@@ -214,46 +191,36 @@ if __name__ == "__main__":
     ht.put("line_10", "Long time the manxome foe he sought--")
     ht.put("line_11", "So rested he by the Tumtum tree")
     ht.put("line_12", "And stood awhile in thought.")
-
     print("")
-
 #STORING CAPACITY
     for i in range(1, 13):
         print(ht.get(f"line_{i}"))
-        
     ht.check()
     old_capacity = ht.get_num_slots()
     ht.resize(ht.capacity * 2)
     new_capacity = ht.get_num_slots()
-
     print(f"\nResized from {old_capacity} to {new_capacity}.\n")
-
 #TEST RESIZING
     for i in range(1, 13):
         print(ht.get(f"line_{i}"))
     ht.check()
     print("")
-
     print("\nLine 2")
     print(ht.djb2("line_2"))
     print(ht.fnv1("line_2"))
     print(ht.hash_index("line_2"))
-    
     print("\nLine 3")
     print(ht.djb2("line_3"))
     print(ht.fnv1("line_3"))
     print(ht.hash_index("line_3"))
-
     print("\nLine 6")
     print(ht.djb2("line_6"))
     print(ht.fnv1("line_6"))
     print(ht.hash_index("line_6"))
-
     print("\nLine 8")
     print(ht.djb2("line_8"))
     print(ht.fnv1("line_8"))
     print(ht.hash_index("line_8"))
-
     print("\nLine 12")
     print(ht.djb2("line_12"))
     print(ht.fnv1("line_12"))
