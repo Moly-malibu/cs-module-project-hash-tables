@@ -7,11 +7,11 @@ import re
 def word_count(s):
     s = s.lower()
     s = re.sub('[^a-z\ \']+', " ", s)
-    script = s.split()
+    words = s.split()
     word_count = {} #Dictionary
-    word_group = set(script)
-    for script in word_group:
-        word_count[script] = script.count(script)
+    word_group = set(words)
+    for word in word_group:
+        word_count[word] = words.count(word)
     return word_count
     
 if __name__ == "__main__":
