@@ -18,7 +18,7 @@ def encrypt(words, letters= alphabet):
             cache[letter] += 1
     return sorted(cache.items(), key=lambda x: x[1], reverse=True) #sort by value
 
-def crack_ceasar(words):
+def deprypt(words):
     period = encrypt(words)
     match = {period[i][0]:alphabet[i]  #Dictionary
                 for i in range (len(period))}
@@ -29,4 +29,4 @@ if __name__ == "__main__":
     # access data cyphertext 
     with open('applications/crack_caesar/ciphertext.txt') as file:
         ciphertext = file.read()   
-    print(crack_ceasar(ciphertext))
+    print(deprypt(ciphertext))
