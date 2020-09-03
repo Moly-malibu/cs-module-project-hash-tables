@@ -7,7 +7,7 @@ alphabet = ['E', 'T', 'A', 'O', 'H', 'N', 'R', 'I', 'S', 'D', 'L', 'W', 'U',
              'G', 'F', 'B', 'M', 'Y', 'C', 'P', 'K', 'V', 'Q', 'J', 'X', 'Z']
 
 
-def letter_frequency(words, letters= alphabet):
+def encrypt(words, letters= alphabet):
     cache = {}
     for letter in words:
         if letter not in letters:
@@ -19,7 +19,7 @@ def letter_frequency(words, letters= alphabet):
     return sorted(cache.items(), key=lambda x: x[1], reverse=True) #sort by value
 
 def crack_ceasar(words):
-    period = letter_frequency(words)
+    period = encrypt(words)
     match = {period[i][0]:alphabet[i]  #Dictionary
                 for i in range (len(period))}
     emission = ''.join(map(lambda x: match[x] if x in match else x, words)) ## Reverse each string in the list using lambda function & map()
