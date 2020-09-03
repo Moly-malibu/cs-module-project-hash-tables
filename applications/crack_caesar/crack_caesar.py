@@ -22,8 +22,8 @@ def deprypt(words):
     period = encrypt(words)
     match = {period[i][0]:alphabet[i]  #Dictionary
                 for i in range (len(period))}
-    emission = ''.join(map(lambda x: match[x] if x in match else x, words)) ## Reverse each string in the list using lambda function & map()
-    print(emission)
+    composition = ''.join(map(lambda x: match[x] if x in match else x, words)) ## Reverse each string in the list using lambda function & map()
+    print(composition)
 
 if __name__ == "__main__":
     # access data cyphertext 

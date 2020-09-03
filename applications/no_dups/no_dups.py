@@ -1,16 +1,15 @@
-cache ={}
-
+#subsequent duplicate words removed
+#Return string
 def no_dups(s):
-   # Your code here
-
+    #Your code here
     words = s.split()
+    dict_w = {}
     for word in words:
-        if word in cache:
-            pass
-        else:
-            cache[word] = 1
-    return ' '.join(list(cache.keys()))
-
+        dict_w[word] = 1
+    string = ""
+    for key in dict_w:
+        string = string + " " + key
+    return string.strip()
 
 if __name__ == "__main__":
     print(no_dups(""))

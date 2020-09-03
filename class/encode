@@ -1,0 +1,9 @@
+records = [
+    ("Alice", "Engineering"),
+    ("Bob", "Sales"),
+    ("Carol", "Sales"),
+    ("Dave", "Engineering"),
+    ("Erin", "Engineering"),
+    ("Frank", "Engineering"),
+    ("Grace", "Marketing")
+]
