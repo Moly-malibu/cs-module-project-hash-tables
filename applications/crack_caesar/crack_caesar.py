@@ -3,11 +3,11 @@
 #https://thispointer.com/python-map-function-explained-with-examples/
 #https://openbookproject.net/thinkcs/python/english3e/lists.html
 
-alphabet_list = ['E', 'T', 'A', 'O', 'H', 'N', 'R', 'I', 'S', 'D', 'L', 'W', 'U',
+alphabet = ['E', 'T', 'A', 'O', 'H', 'N', 'R', 'I', 'S', 'D', 'L', 'W', 'U',
              'G', 'F', 'B', 'M', 'Y', 'C', 'P', 'K', 'V', 'Q', 'J', 'X', 'Z']
 
 
-def letter_frequency(words, letters= alphabet_list):
+def letter_frequency(words, letters= alphabet):
     cache = {}
     for letter in words:
         if letter not in letters:
@@ -20,7 +20,7 @@ def letter_frequency(words, letters= alphabet_list):
 
 def crack_ceasar(words):
     letter_period = letter_frequency(words)
-    match = {letter_period[i][0]:alphabet_list[i]  #Dictionary
+    match = {letter_period[i][0]:alphabet[i]  #Dictionary
                 for i in range (len(letter_period))}
     emission = ''.join(map(lambda x: match[x] if x in match else x, words)) ## Reverse each string in the list using lambda function & map()
     print(emission)
