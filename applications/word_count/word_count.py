@@ -2,6 +2,9 @@
 #Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl. If the pattern isn’t found, string is returned unchanged. repl can be a string or a function; if it is a string, any backslash escapes in it are processed. That is, \n is converted to a single newline character, \r is converted to a linefeed, and so forth. Unknown escapes such as \j are left alone. Backreferences, such as \6, are replaced with the substring matched by group 6 in the pattern. For example:
 #re.sub(r'def\s+([a-zA-Z_][a-zA-Z_0-9]*)\s*\(\s*\)
 #https://docs.python.org/3.1/library/re.html
+
+#returns a dictionary of words and their counts
+#no ignored characters, return an empty dictionary.
 import re
 
 def word_count(s):
